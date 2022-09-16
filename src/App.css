@@ -1,4 +1,4 @@
-/* .App {
+.App {
   text-align: center;
 }
 
@@ -35,37 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-} */
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.main {
-  margin: 50px;
-}
-.disc {
-  display: flex;
-}
-
-.inp {
-  width: 50%;
-  height: 20%;
-}
-#discription {
-  color: red;
-  font-weight: 500;
-}
-.DropDown {
-  /* margin: auto; */
-  width: 30%;
-  height: 20%;
-}
-.manif {
-  display: flex;
-}
-.king {
-  width: 89%;
-  margin: auto;
 }
