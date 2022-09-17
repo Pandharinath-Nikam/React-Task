@@ -220,9 +220,6 @@ const ItemGroup = () => {
           </div>
         </div>
 
-        {/* <div style={{ backgroundColor: "red" }}>Ram: {ram1}</div>
-        <div style={{ backgroundColor: "green" }}>Processor: {processor1}</div>
-        <div style={{ backgroundColor: "blue" }}>disc: {disc1}</div> */}
         <table border={"1px"} cellPadding={"4px"} width={"50%"}>
           <thead>
             <th>Attribute</th>
@@ -231,7 +228,7 @@ const ItemGroup = () => {
           <tbody>
             <tr>
               <td>RAM</td>
-              <td style={{ margin: "2px" }}>{ram1 + "  "}</td>
+              <td>{ram1 + "  "}</td>
             </tr>
             <tr>
               <td>Processor</td>
