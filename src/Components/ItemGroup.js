@@ -1,21 +1,65 @@
 import React, { useState } from "react";
-import MultipleSelectChip from "./Option";
 import Autocomplete from "@mui/material/Autocomplete";
 import { TextField } from "@mui/material";
+import Select from "react-select";
 
 const ItemGroup = () => {
+  const [data, setData] = useState("");
   const [user, setUser] = useState({ agree: false });
+  const [ram1, setRam] = useState([]);
+  const [processor1, setProcessor] = useState([]);
+  const [disc1, setDisc] = useState([]);
+
+  const ram = [
+    { value: "1", label: "4 GB" },
+    { value: "2", label: "8 GB" },
+    { value: "3", label: "16 GB" },
+    { value: "4", label: "32 GB" },
+    { value: "5", label: "64 GB" },
+    { value: "6", label: "128 GB" },
+  ];
+
+  const processor = [
+    { value: "1", label: "RIZEN" },
+    { value: "2", label: "AMD" },
+    { value: "3", label: "Iten" },
+    { value: "4", label: "AMD A10" },
+    { value: "5", label: "RYZEN5" },
+    { value: "6", label: "Intel Core" },
+  ];
+
+  const disc = [
+    { value: "1", label: "1TB" },
+    { value: "2", label: "500GB" },
+    { value: "3", label: "256GB" },
+    { value: "4", label: "128GB" },
+    { value: "5", label: "512GB" },
+    { value: "6", label: "1GB" },
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+    setData({ ...user, [name]: value });
   };
+  console.log("data", data);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("User: ", user);
   };
 
+  const handleRam = (e) => {
+    setRam(Array.isArray(e) ? e.map((x) => x.label) : []);
+  };
+
+  const handleProcessor = (e) => {
+    setProcessor(Array.isArray(e) ? e.map((x) => x.label) : []);
+  };
+
+  const handleDisc = (e) => {
+    setDisc(Array.isArray(e) ? e.map((x) => x.label) : []);
+  };
   const Manufacturer = [
     { label: "Dell" },
     { label: "HP" },
@@ -27,14 +71,21 @@ const ItemGroup = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "flex", marginLeft: 30, marginBottom: 10 }}>
+        <div
+          style={{
+            display: "flex",
+            marginLeft: 30,
+            marginBottom: 10,
+            marginTop: 30,
+          }}
+        >
           <label>Item Group Name</label>
           <input
             type="text"
             name="name"
             placeholder="Laptop"
             onChange={handleChange}
-            style={{ marginLeft: 30, width: 710 }}
+            style={{ marginLeft: 30, width: 710, height: 30 }}
           />
         </div>
 
@@ -109,20 +160,15 @@ const ItemGroup = () => {
               name="RAM"
               onChange={handleChange}
               style={{ marginLeft: 155, height: 50, width: 300, marginTop: 20 }}
+              placeholder="Ram"
             >
-              <option value="RAM">RAM</option>
+              <option value="ram">RAM</option>
             </select>
           </div>
           <div
             style={{ marginLeft: 50, height: 50, width: 300, marginTop: 20 }}
           >
-            <MultipleSelectChip
-              chip={[
-                { key: 1, label: "4gb" },
-                { key: 2, label: "8gb" },
-                { key: 3, label: "16gb" },
-              ]}
-            />
+            <Select options={ram} isMulti onChange={handleRam} />
           </div>
         </div>
         <div
@@ -145,13 +191,7 @@ const ItemGroup = () => {
           <div
             style={{ marginLeft: 50, height: 50, width: 300, marginTop: 20 }}
           >
-            <MultipleSelectChip
-              chip={[
-                { key: 1, label: "Rizon" },
-                { key: 2, label: "AMD" },
-                { key: 3, label: "Inten" },
-              ]}
-            />
+            <Select options={processor} isMulti onChange={handleProcessor} />
           </div>
         </div>
         <div
@@ -168,21 +208,41 @@ const ItemGroup = () => {
               onChange={handleChange}
               style={{ marginLeft: 155, height: 50, width: 300, marginTop: 20 }}
             >
-              <option value="disc">DISC</option>
+              <option value="disc" onChange={handleChange}>
+                DISC
+              </option>
             </select>
           </div>
           <div
             style={{ marginLeft: 50, height: 50, width: 300, marginTop: 20 }}
           >
-            <MultipleSelectChip
-              chip={[
-                { key: 1, label: "1TB" },
-                { key: 2, label: "500GB" },
-                { key: 3, label: "256GB" },
-              ]}
-            />
+            <Select options={disc} isMulti onChange={handleDisc} />
           </div>
         </div>
+
+        {/* <div style={{ backgroundColor: "red" }}>Ram: {ram1}</div>
+        <div style={{ backgroundColor: "green" }}>Processor: {processor1}</div>
+        <div style={{ backgroundColor: "blue" }}>disc: {disc1}</div> */}
+        <table border={"1px"} cellPadding={"4px"} width={"50%"}>
+          <thead>
+            <th>Attribute</th>
+            <th>Option</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RAM</td>
+              <td style={{ margin: "2px" }}>{ram1 + "  "}</td>
+            </tr>
+            <tr>
+              <td>Processor</td>
+              <td>{processor1 + "  "}</td>
+            </tr>
+            <tr>
+              <td>DISC</td>
+              <td>{disc1 + "  "}</td>
+            </tr>
+          </tbody>
+        </table>
       </form>
     </>
   );
