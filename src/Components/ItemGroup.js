@@ -227,7 +227,12 @@ const ItemGroup = () => {
           </div>
         </div>
 
-        <table border={"1px"} cellPadding={"4px"} width={"50%"}>
+        <table
+          border={"1px"}
+          cellPadding={"4px"}
+          width={"50%"}
+          style={{ borderCollapse: "collapse" }}
+        >
           <thead>
             <tr>
               {column.map((item, index) => (
