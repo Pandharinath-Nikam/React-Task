@@ -10,6 +10,8 @@ const ItemGroup = () => {
   const [processor1, setProcessor] = useState([]);
   const [disc1, setDisc] = useState([]);
 
+  const column = [{ heading: "Atrribute" }, { heading: "Options" }];
+
   const ram = [
     { value: "1", label: "4 GB" },
     { value: "2", label: "8 GB" },
@@ -162,6 +164,7 @@ const ItemGroup = () => {
               style={{ marginLeft: 155, height: 50, width: 300, marginTop: 20 }}
               placeholder="Ram"
             >
+              <option value="">None</option>
               <option value="ram">RAM</option>
             </select>
           </div>
@@ -185,6 +188,7 @@ const ItemGroup = () => {
               onChange={handleChange}
               style={{ marginLeft: 155, height: 50, width: 300, marginTop: 20 }}
             >
+              <option value="">None</option>
               <option value="processor">Processor</option>
             </select>
           </div>
@@ -208,6 +212,9 @@ const ItemGroup = () => {
               onChange={handleChange}
               style={{ marginLeft: 155, height: 50, width: 300, marginTop: 20 }}
             >
+              <option value="" onChange={handleChange}>
+                None
+              </option>
               <option value="disc" onChange={handleChange}>
                 DISC
               </option>
@@ -222,21 +229,43 @@ const ItemGroup = () => {
 
         <table border={"1px"} cellPadding={"4px"} width={"50%"}>
           <thead>
-            <th>Attribute</th>
-            <th>Option</th>
+            <tr>
+              {column.map((item, index) => (
+                <TableHeadItem item={item} />
+              ))}
+            </tr>
           </thead>
           <tbody>
             <tr>
-              <td>RAM</td>
-              <td>{ram1 + "  "}</td>
+              {!data.RAM && !data.Processor && !data.DISC && (
+                <td colSpan={2} style={{ textAlign: "center" }}>
+                  No Data Found
+                </td>
+              )}
             </tr>
             <tr>
-              <td>Processor</td>
-              <td>{processor1 + "  "}</td>
+              {data.RAM && (
+                <>
+                  <td>RAM</td>
+                  <td>{ram1 + "  "}</td>
+                </>
+              )}
             </tr>
             <tr>
-              <td>DISC</td>
-              <td>{disc1 + "  "}</td>
+              {data.Processor && (
+                <>
+                  <td>Processor</td>
+                  <td>{processor1 + "  "}</td>
+                </>
+              )}
+            </tr>
+            <tr>
+              {data.DISC && (
+                <>
+                  <td>DISC</td>
+                  <td>{disc1 + "  "}</td>
+                </>
+              )}
             </tr>
           </tbody>
         </table>
@@ -244,5 +273,5 @@ const ItemGroup = () => {
     </>
   );
 };
-
+const TableHeadItem = ({ item }) => <th>{item.heading}</th>;
 export default ItemGroup;
